@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skmirza-financeme-deploy
+  labels:
+    app: skmirza-financeme-deploy-lb01
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: skmirza-financeme-app
+  template:
+    metadata:
+      labels:
+        app: skmirza-financeme-app
+    spec:
+      containers:
+      - name: skmirza-financeme-container
+        image: sameer014/skmirza-financeme-img:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "512m"
+          requests:
+            memory: "256Mi"
+            cpu: "256m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skmirza-financeme-np-service
+  labels:
+    app: skmirza-financeme-np-app
+spec:
+  selector:
+    app: skmirza-financeme-app
+
+  type: NodePort
+  ports:
+  - nodePort: 30014
+    port: 80
+    targetPort: 80
