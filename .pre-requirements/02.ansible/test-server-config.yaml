@@ -6,7 +6,7 @@
     tasks:
       - name: Install Java
         apt:
-          name: openjdk-17-jdk
+          name: openjdk-17-jre
           state: present
       - name: Install Tomcat
         shell:
