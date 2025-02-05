@@ -13,6 +13,7 @@ They are facing following problems, because of various technologies involved in 
     • Continuous manual monitoring the application is quite challenging.
 
 To implement Continuous Integration & Continuous Deployment using following tools:
+
     • Git - For version control for tracking changes in the code files
     • Maven - For Continuous Build 
     • Jenkins - For continuous integration and continuous deployment
