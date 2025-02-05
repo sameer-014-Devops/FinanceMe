@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Automatically select the first JAR file in the directory
-JAR_FILE=$(ls *.jar 2>/dev/null | head -n 1)
+JAR_FILE="financeme.jar"
 PID_FILE="app.pid"
 
 # Check if a JAR file exists
@@ -40,7 +40,8 @@ case "$1" in
             else
                 echo "Application stopped successfully."
             fi
-            rm -f "$PID_FILE"
+            rm -rf "$PID_FILE"
+            rm -rf output.log
         else
             echo "No running application found."
         fi
