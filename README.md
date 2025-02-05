@@ -1,4 +1,4 @@
-********** FinanceMe - Web Application **********
+                                                        ********** FinanceMe - Web Application **********
 
 FinanceMe is a Global leading Banking and Financial services provider based out of Germany.
 The company offers products and services like Banking, Funds Management, Loans, Debit Cards and Credits Cards, Investment Banking etc.
@@ -22,7 +22,8 @@ To implement Continuous Integration & Continuous Deployment using following tool
     • Prometheus and Grafana - For Automated Monitoring and Report Visualization
     • Kubernetes - For Deployment
     
-Solution:
+Solution :-
+
     • Using Terraform :-
                 • Creating New VPC
                 • Creating 2 Subnets
@@ -41,15 +42,17 @@ Solution:
                 • Configuration of Production-Server (Kubernetes)
 
     • Using Jenkins :-
-                • Creating a testing pipeline for testing the web applications
-                • Creating a production pipeline for deployment to main server
+                • Creating a testing pipeline for build, deploy to test server, for testing the web applications
+                • Creating a production pipeline for build, deploy to production server deployment to main server
 
     • Using Docker :-
                 • Creating and build a Docker image
                 • Publishing created Docker image to Docker Repository
+
     • Using Kubernetes :-
                 • Pulling Docker image to Production server
                 • Creating Minimum 4 replicas
+    
     • Using Prometheus & Grafana :- 
                 • Monitoring Production-server
 
