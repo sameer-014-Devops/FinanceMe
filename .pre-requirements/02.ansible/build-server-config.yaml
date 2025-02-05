@@ -8,7 +8,7 @@
           name: "{{ item }}"
           state: present
         with_items:
-          - openjdk-8-jre
+          - openjdk-17-jre
           - git
 
       - name: Installation of Docker
