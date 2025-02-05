@@ -1,4 +1,4 @@
-                                                        ********** FinanceMe - Web Application **********
+****************************************** FinanceMe - Web Application **************************************************
 
 FinanceMe is a Global leading Banking and Financial services provider based out of Germany.
 The company offers products and services like Banking, Funds Management, Loans, Debit Cards and Credits Cards, Investment Banking etc.
