@@ -5,7 +5,7 @@ JAR_FILE=$(ls financeme-*.jar 2>/dev/null | sort -V | tail -n 1)
 PID_FILE="app.pid"
 
 # Check if a JAR file exists
-if [ ! -f "$JAR_FILE" ]; then
+if [ -z "$JAR_FILE" ]; then
     echo "No JAR file found in the current directory."
     exit 1
 fi
