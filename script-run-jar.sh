@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Automatically select the first JAR file in the directory
-JAR_FILE="financeme.jar"
+JAR_FILE=$(ls financeme-*.jar 2>/dev/null | sort -V | tail -n 1)
 PID_FILE="app.pid"
 
 # Check if a JAR file exists
-if [ -z "$JAR_FILE" ]; then
+if [ ! -f "$JAR_FILE" ]; then
     echo "No JAR file found in the current directory."
     exit 1
 fi
