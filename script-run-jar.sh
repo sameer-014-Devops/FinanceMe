@@ -1,24 +1,46 @@
 #!/bin/bash
 
-JAR_FILE="*.jar"
+# Automatically select the first JAR file in the directory
+JAR_FILE=$(ls *.jar 2>/dev/null | head -n 1)
 PID_FILE="app.pid"
+
+# Check if a JAR file exists
+if [ -z "$JAR_FILE" ]; then
+    echo "No JAR file found in the current directory."
+    exit 1
+fi
 
 case "$1" in
     start)
         if [ -f "$PID_FILE" ]; then
-            echo "Application is already running."
+            echo "Application is already running (PID: $(cat $PID_FILE))."
         else
+            echo "Starting the application with $JAR_FILE..."
             nohup java -jar "$JAR_FILE" > output.log 2>&1 &
             echo $! > "$PID_FILE"
-            echo "Application started..."
+            sleep 2
+            if ps -p $(cat "$PID_FILE") > /dev/null; then
+                echo "Application started successfully (PID: $(cat $PID_FILE))."
+            else
+                echo "Failed to start the application. Check output.log for errors."
+                rm -f "$PID_FILE"
+            fi
         fi
         ;;
     
     stop)
         if [ -f "$PID_FILE" ]; then
-            kill $(cat "$PID_FILE")
-            rm "$PID_FILE"
-            echo "Application stopped..."
+            PID=$(cat "$PID_FILE")
+            echo "Stopping application with PID $PID..."
+            kill $PID
+            sleep 2
+            if ps -p $PID > /dev/null; then
+                echo "Failed to stop the application. Forcing termination..."
+                kill -9 $PID
+            else
+                echo "Application stopped successfully."
+            fi
+            rm -f "$PID_FILE"
         else
             echo "No running application found."
         fi
@@ -31,6 +53,7 @@ case "$1" in
                 echo "Application is running (PID: $PID)."
             else
                 echo "PID file exists but application is not running."
+                rm -f "$PID_FILE"
             fi
         else
             echo "Application is not running."
