@@ -198,7 +198,7 @@ pipeline{
                     } else {
                         echo '**********Pod is not running, So Creating the Deployment**********'
                         sh """ssh $User_Name@$KubeM_Pvt_IP kubectl apply -f financemedeploy.yaml"""
-                        sleep 15
+                        sleep 10
                         sh """ssh $User_Name@$KubeM_Pvt_IP kubectl get pods -o wide"""
                     } 
                     // if the pod status is errimagepull or pending, then it should rollout undo the deployment
@@ -250,9 +250,11 @@ pipeline{
                 expression { Deploy_Main == true }
             }
             steps{
+              script{
                 echo '**********Cleaning FinanceMe Production workspace**********'
                 cleanWs()
-                deleteDir()
+                rm -rf *
+              }
             }
         }
     }
