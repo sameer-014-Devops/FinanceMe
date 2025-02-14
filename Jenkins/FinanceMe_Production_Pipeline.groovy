@@ -231,8 +231,6 @@ pipeline{
                 success{
                     script{
                         echo '########## Deployment to the Production Environment is SUCCESSFUL ##########'
-                        cleanWs()
-                        deleteDir()
                     }
                 }
                 failure{
@@ -240,6 +238,19 @@ pipeline{
                         echo '########## Deployment to the Production Environment is FAILED ##########'
                     }
                 }
+            }
+        }
+        stage ('Cleaning_Production_Workspace'){
+            agent {
+                label 'BN01'
+            }
+            when{
+                expression { Deploy_Main == true }
+            }
+            steps{
+                echo '**********Cleaning FinanceMe Production workspace**********'
+                cleanWs()
+                deleteDir()
             }
         }
     }
