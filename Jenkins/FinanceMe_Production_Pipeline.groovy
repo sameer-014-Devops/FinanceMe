@@ -231,6 +231,8 @@ pipeline{
                 success{
                     script{
                         echo '########## Deployment to the Production Environment is SUCCESSFUL ##########'
+                        cleanWs()
+                        deleteDir()
                     }
                 }
                 failure{
